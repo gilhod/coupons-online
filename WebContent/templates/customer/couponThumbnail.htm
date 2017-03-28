@@ -1,0 +1,13 @@
+<div class=" col-md-3">
+    <div class="thumbnail">
+      	<img ng-src="{{coupon.image}}" >
+	  <div class="caption">
+	    <h3>{{coupon.title}}</h3>
+	    <h4>{{coupon.companyName}}</h4>
+	    <p>{{coupon.message}}</p>
+	    <p>valid until: {{coupon.endDate | date : "dd.MM.y"}}</p>
+	   	<p>price: {{coupon.price}}$</p>
+	   	<button class="btn btn-primary" ng-click="buy(coupon.id, coupon.title, $index)"  >Buy</button> 
+	   </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div ng-include="'templates/customer/customerNavBar.htm'"></div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3">
+
+									<!--Search Panel-->
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<i class="fa fa-bell fa-fw"></i> Search Panel
+				</div>
+				<div class="panel-body">
+					<form class="form">
+
+						<div class="form-group">
+							<select class="form-control" ng-model="searchType">
+								<option value="1">No Filter</option>
+								<option value="2">Filter by type</option>
+								<option value="3">Filter by price</option>
+							</select>
+						</div>
+
+						<div class="form-group" ng-show="searchType==2">
+
+							<select class="form-control" ng-model="type">
+								<option ng-repeat="x in types" value="{{x}}">{{x}}</option>
+							</select>
+						</div>
+
+						<div class="form-group" ng-show="searchType==3">
+							<input type="text" class="form-control" ng-model="price">
+						</div>
+
+						<div class="form-group">
+							<button class="btn btn-primary" ng-click="getPurchases()">Search</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+									<!--Search Results-->
+						
+			<div class="panel panel-default" ng-show="showSearchResults">
+				<div class="panel-heading">
+					<i class="fa fa-bell fa-fw"></i> {{numberOfPurchases}} purchases found
+				</div>
+				<div class="panel-body">
+					<div class="list-group">
+						<a ng-repeat="x in purchases"
+							ng-click="getPurchase(x.purchaseNumber)" href=""
+							class="list-group-item">{{ x.couponTitle }}</a>
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+
+
+		<!--Purchase Details Panel-->
+
+		<div class="col-lg-4">
+			<div class="panel panel-default" ng-show="showPurchaseDetails">
+				<div class="panel-heading">
+					<i class="fa fa-bell fa-fw"></i> {{purchase.couponTitle}}
+				</div>
+				<div class="panel-body">
+					<ul class="list-group">
+						<li class="list-group-item"><strong>Purchase Number:
+						</strong>{{purchase.purchaseNumber}}</li>
+						<li class="list-group-item"><strong>Purchase Date: </strong>{{purchase.purchaseDate
+							| date : "dd.MM.y"}}</li>
+						<li class="list-group-item"><strong>Coupon Number: </strong>{{purchase.couponID}}</li>
+						<li class="list-group-item"><strong>Coupon Type: </strong>{{purchase.couponType}}</li>
+						<li class="list-group-item"><strong>Coupon Price: </strong>{{purchase.price}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

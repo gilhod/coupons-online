@@ -1,0 +1,41 @@
+
+<div ng-include="'templates/admin/adminNavBar.htm'"></div>
+
+<div class="container">
+<h2>Add New User</h2>
+
+	<div class="row">
+  		<form name="addUserForm" novalidate >
+			<div class="col-xs-3"> 
+			 
+			<div class="form-group">
+					<label class="radio-inline"><input type="radio" name="type" ng-model="userTypeAdd" value="company"  ng-required="!userTypeAdd">Company</label>
+					<label class="radio-inline"><input type="radio" name="type" ng-model="userTypeAdd" value="customer" ng-required="!userTypeAdd">Customer</label>
+					<br><span style="color:red" ng-show="addUserForm.type.$error.required">*required</span>
+			</div>
+			<div class="form-group">
+					<label> Name</label> 
+					<input type="text" name="username" class="form-control" ng-model="newUser.name" required>
+					<span style="color:red" ng-show="addUserForm.username.$error.required" >*required</span>
+			</div>
+			<div class="form-group">
+					<label> Password</label> 
+					<input type="text" name="password" class="form-control" ng-model="newUser.password" required ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,12}$/">
+					<span style="color:red" ng-show="addUserForm.password.$error.required">*required</span>
+					<span style="color:red" ng-show="addUserForm.password.$error.pattern" >*must be 6-12 characters, at least 1 uppercase, 1 lowercase, and 1 digit</span>
+			</div>
+			<div class="form-group"  ng-hide="userTypeAdd=='customer'">
+					<label> Email</label> 
+					<input type="text" name="email" class="form-control" ng-model="newUser.email" ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/" >
+					<span style="color:red" ng-show="addUserForm.email.$error.pattern" >*illegal email address </span>
+					
+			</div>		
+			<div class="form-group"> 
+					<button class="btn btn-primary" ng-click="newUserSubmit(addUserForm.$invalid)">Submit</button>
+			</div>
+ 	</div>
+ </form>
+ 
+ </div>
+ </div>
+ 

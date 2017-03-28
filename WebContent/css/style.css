@@ -1,0 +1,21 @@
+
+.navbar{
+	background-color: #696969;
+}
+
+.navbar .nav > li > a {
+	color: white;
+	}
+.panel > .panel-heading {
+ 	background-color: #F0E68C;
+}
+.panel > .subheading {
+ 	background-color:#696969;
+ 	color: white;
+}
+
+.thumbnail > img {
+	width: 100%;
+	height: 200px;
+}
+

@@ -1,0 +1,104 @@
+<div ng-include="'templates/company/companyNavBar.htm'"></div>
+
+
+<div class="container">
+	
+	
+	<div class="row">
+	
+		<div ng-hide="showAddCouponImage">
+
+		<h2>Add New Coupon</h2>		
+		<form name="addCouponForm" novalidate>
+
+			<div class="col-xs-3">
+
+				<div class="form-group">
+					<label> Coupon Title</label> 
+					<input type="text" name="title" class="form-control" ng-model="coupon.title" required>
+					<span style="color:red" ng-show="addCouponForm.title.$error.required" >*required</span>
+				</div>
+				
+				<div class="form-group">
+					<label> Start Date</label> 
+					<input type="date" name="start" class="form-control" ng-model="startDate" required min="{{today | date:'yyyy-MM-dd'}}">
+					<span style="color:red" ng-show="addCouponForm.start.$error.required" >*required</span>
+		
+				</div>
+				
+				<div class="form-group">
+					<label> End Date</label> 
+					<input type="date" name="end" class="form-control" ng-model="endDate" required min="{{startDate | date:'yyyy-MM-dd'}}">
+					<span style="color:red" ng-show="addCouponForm.end.$error.required" >*required</span>
+					
+				</div>
+				
+				<div class="form-group">
+					<label> Amount</label> 
+					<input type="text" name="amount" class="form-control" ng-model="coupon.amount" required ng-pattern="/^[1-9]\d*$/">
+					<span style="color:red" ng-show="addCouponForm.amount.$error.required" >*required</span>
+					<span style="color:red" ng-show="addCouponForm.amount.$error.pattern" >*must be whole positive number</span>
+				</div>						
+					
+			</div>
+			
+			<div class=" col-xs-offset-1 col-xs-3">
+				
+				<div class="form-group">
+					<label> Price</label> 
+					<input type="text" name="price" class="form-control" ng-model="coupon.price" required ng-pattern="/^[+]?\d+([.]\d+)?$/">
+					<span style="color:red" ng-show="addCouponForm.price.$error.required" >*required</span>
+					<span style="color:red" ng-show="addCouponForm.price.$error.pattern" >*must be a positive number</span>
+				</div>
+				
+				<div class="form-group">
+					<label> Coupon Type</label> 
+					<select class="form-control" name="type" ng-model="coupon.couponType" required>
+						<option ng-repeat="x in types" value="{{x}}">{{x}}</option>
+					</select>
+					<span style="color:red" ng-show="addCouponForm.type.$error.required" >*required</span>
+							
+				</div>
+				
+				<div class="form-group">
+					<label>Message</label> 
+					<textarea type="text" class="form-control" ng-model="coupon.message"></textarea>
+				</div>
+				
+				<div class="form-group"> 
+					<button class="btn btn-primary" ng-click="addCouponSubmit(addCouponForm.$invalid)">Submit</button>
+				</div>
+				
+			</div>
+		</form>
+	</div>
+	
+	
+					<!--Add Coupon Image-->
+	<div class=" col-xs-offset-3 col-xs-6" ng-show="showAddCouponImage">
+		<div class="text-center">
+			<h3>Coupon was added successfully!</h3>
+			<h4>Select an image for your coupon</h4>
+		
+	<div class="panel panel-default" >
+		<div class="panel-body">
+			
+			<form>
+				<div class="form-group">
+						<label class="radio"><input type="radio" ng-model="imageSelect" value="upload"  >Upload Image</label>
+						<label class="radio"><input type="radio" ng-model="imageSelect" value="default" >Default Image</label>
+				</div>
+					<div class="form-group" ng-show="imageSelect=='upload'">
+						<input type="file" file-model="image">
+					</div>
+				<button type="submit" class="btn btn-primary" ng-click="uploadCouponImage()">Submit</button>
+			</form>
+		</div>
+		</div>
+		</div>
+	</div>
+</div>		
+</div>
+	
+
+
